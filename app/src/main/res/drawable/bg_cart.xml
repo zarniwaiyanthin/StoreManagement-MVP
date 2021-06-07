@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:state_selected="true">
+    <shape android:shape="rectangle">
+        <stroke android:color="@color/ic_tint" android:width="@dimen/size1"/>
+    </shape>
+</item>
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:color="@color/white" android:width="@dimen/size1"/>
+        </shape>
+    </item>
+</selector>

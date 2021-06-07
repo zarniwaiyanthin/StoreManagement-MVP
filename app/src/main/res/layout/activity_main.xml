@@ -4,15 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/white">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+   <androidx.appcompat.widget.Toolbar
+       android:id="@+id/tbCP"
+       android:layout_width="@dimen/size0"
+       android:layout_height="wrap_content"
+       android:background="@color/white"
+       app:contentInsetStart="@dimen/size0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toTopOf="parent">
+       <TextView
+           android:id="@+id/tvCP"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:text="Customers and Products"
+           style="@style/text.title"
+           android:gravity="center"
+           />
+   </androidx.appcompat.widget.Toolbar>
+    <ImageView
+        android:id="@+id/ivPerson"
+        android:layout_width="@dimen/size68"
+        android:layout_height="@dimen/size68"
+        android:layout_marginLeft="@dimen/size24"
+        android:layout_marginTop="@dimen/size32"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tbCP"
+        android:src="@drawable/ic_user"
+        android:scaleType="center"
+        android:background="@color/bg_icon_background"
+        app:tint="@color/ic_tint"/>
+
+<com.google.android.material.button.MaterialButton
+    android:id="@+id/btnCustomer"
+    android:layout_width="@dimen/size0"
+    style="@style/Widget.MaterialComponents.Button.TextButton"
+    android:layout_height="@dimen/size0"
+    android:text="@string/customers_list"
+    android:textAppearance="@style/text.normal"
+    android:textColor="@color/text_color"
+    android:layout_marginEnd="@dimen/size24"
+    app:layout_constraintStart_toEndOf="@id/ivPerson"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@id/ivPerson"
+    app:layout_constraintBottom_toBottomOf="@id/ivPerson"
+    app:icon="@drawable/ic_baseline_arrow_forward"
+    app:iconGravity="end"
+    app:iconTint="#000"
+    app:strokeColor="@color/bg_icon_background"
+    app:cornerRadius="@dimen/size0"
+    app:strokeWidth="@dimen/size1"
+    android:insetTop="@dimen/size0"
+    android:insetBottom="@dimen/size0"
+    android:layout_marginRight="@dimen/size24" />
+
+    <ImageView
+        android:id="@+id/ivProduct"
+        android:layout_width="@dimen/size68"
+        android:layout_height="@dimen/size68"
+        android:layout_marginLeft="@dimen/size24"
+        android:layout_marginTop="@dimen/size32"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivPerson"
+        android:src="@drawable/ic_box"
+        android:scaleType="center"
+        android:background="@color/bg_icon_background"
+        app:tint="@color/ic_tint"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnProduct"
+        android:layout_width="@dimen/size0"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_height="@dimen/size0"
+        android:text="@string/product_list"
+        android:textAppearance="@style/text.normal"
+        android:textColor="@color/text_color"
+        android:layout_marginEnd="@dimen/size24"
+        app:layout_constraintStart_toEndOf="@id/ivProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivProduct"
+        app:layout_constraintBottom_toBottomOf="@id/ivProduct"
+        app:icon="@drawable/ic_baseline_arrow_forward"
+        app:iconGravity="end"
+        app:iconTint="#000"
+        app:strokeColor="@color/bg_icon_background"
+        app:cornerRadius="@dimen/size0"
+        app:strokeWidth="@dimen/size1"
+        android:insetTop="@dimen/size0"
+        android:insetBottom="@dimen/size0"
+        android:layout_marginRight="@dimen/size24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

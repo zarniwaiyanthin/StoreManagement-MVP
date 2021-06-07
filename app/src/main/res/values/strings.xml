@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Store Management</string>
+    <string name="users_list">Users List</string>
+    <string name="thermometer">Thermometer</string>
+    <string name="k_79_000">K 79,000</string>
+    <string name="maung_maung">Maung Maung</string>
+    <string name="_09412154325">09412154325</string>
+    <string name="add_user">Add User</string>
+    <string name="name">Name</string>
+    <string name="phone_no">Phone No</string>
+    <string name="add_user">Add User</string>
+    <string name="add_product">Add Product</string>
+    <string name="price">Price</string>
+    <string name="add_product">Add Product</string>
+    <string name="product_list">Product List</string>
+    <string name="choose_product">Choose Product</string>
+    <string name="customers_list">Customers List</string>
+    <string name="product_list">Product List</string>
 </resources>
