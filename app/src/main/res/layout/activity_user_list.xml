@@ -31,6 +31,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUser"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size0"
         app:layout_constraintBottom_toBottomOf="parent"
