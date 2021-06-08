@@ -27,9 +27,8 @@
         android:layout_width="@dimen/size0"
         android:layout_height="@dimen/size0"
         app:layout_constraintDimensionRatio="W,1:1"
-        android:src="@drawable/ic_baseline_add_24"
-        android:tint="@color/black"
-        android:background="@drawable/color_toggle"
+        android:src="@drawable/image_toggle"
+        android:background="@drawable/background_color_toggle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
