@@ -17,4 +17,5 @@
     <string name="customers_list">Customers List</string>
     <string name="product_list">Product List</string>
     <string name="done">Done</string>
+    <string name="add_customer">Add Customer</string>
 </resources>

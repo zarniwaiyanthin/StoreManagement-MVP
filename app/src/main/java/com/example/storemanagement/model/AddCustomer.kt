@@ -2,9 +2,9 @@ package com.example.storemanagement.model
 
 import com.google.gson.annotations.SerializedName
 
-class Product(
-        @SerializedName("productId") val productId:Int?,
+class AddCustomer(
+        @SerializedName("customerId") val customerId:Int?,
         @SerializedName("name") val name:String?,
-        @SerializedName("price") val price:String?
+        @SerializedName("phoneNo") val phoneNo:String?
 ) {
 }

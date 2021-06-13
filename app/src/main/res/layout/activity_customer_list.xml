@@ -31,13 +31,13 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvUser"
+        android:id="@+id/rvCustomer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbUserList"
-        tools:listitem="@layout/item_user" />
+        tools:listitem="@layout/item_customer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

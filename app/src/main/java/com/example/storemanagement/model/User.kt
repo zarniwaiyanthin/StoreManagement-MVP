@@ -1,7 +1,8 @@
 package com.example.storemanagement.model
 
+import com.google.gson.annotations.SerializedName
+
 class User(
-        val userName: String,
-        val phone: String
+        @SerializedName("userId") val userId:Int? = -1
 ) {
 }

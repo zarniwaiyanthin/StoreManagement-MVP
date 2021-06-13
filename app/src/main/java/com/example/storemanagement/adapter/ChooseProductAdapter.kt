@@ -26,7 +26,7 @@ class ChooseProductAdapter:RecyclerView.Adapter<ChooseProductAdapter.MyViewHolde
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item=itemList.get(position)
-        holder.itemView.tvPName.text=item.productName
+        holder.itemView.tvPName.text=item.name
         holder.itemView.tvPrice.text=item.price
     }
 
