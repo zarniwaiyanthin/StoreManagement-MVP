@@ -1,8 +1,8 @@
-package com.example.storemanagement
+package com.example.storemanagement.activity
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.storemanagement.R
 
 class AddProductActivity:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

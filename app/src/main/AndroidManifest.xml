@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StoreManagement">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddProductActivity" />
-        <activity android:name=".AddUserActivity" />
-        <activity android:name=".ChooseProductActivity" />
-        <activity android:name=".ProductListActivity" />
-        <activity android:name=".UserListActivity" />
+        <activity android:name=".activity.AddProductActivity" />
+        <activity android:name=".activity.AddUserActivity" />
+        <activity android:name=".activity.ChooseProductActivity" />
+        <activity android:name=".activity.ProductListActivity" />
+        <activity android:name=".activity.UserListActivity" />
     </application>
 
 </manifest>

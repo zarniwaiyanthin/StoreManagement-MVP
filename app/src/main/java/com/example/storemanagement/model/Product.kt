@@ -1,4 +1,4 @@
-package com.example.storemanagement
+package com.example.storemanagement.model
 
 class Product(
         val productName: String,

@@ -1,9 +1,11 @@
-package com.example.storemanagement
+package com.example.storemanagement.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.storemanagement.model.Product
+import com.example.storemanagement.R
 import kotlinx.android.synthetic.main.item_choose_product.view.*
 
 class ChooseProductAdapter:RecyclerView.Adapter<ChooseProductAdapter.MyViewHolder>() {

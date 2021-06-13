@@ -1,34 +1,36 @@
-package com.example.storemanagement
+package com.example.storemanagement.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_product.view.*
+import com.example.storemanagement.R
+import com.example.storemanagement.model.User
+import kotlinx.android.synthetic.main.item_user.view.*
 
-class ProductAdapter:RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
-    private val itemList= mutableListOf<Product>()
+class UserAdapter:RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
+    private val itemList= mutableListOf<User>()
     class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater=LayoutInflater.from(parent.context)
-        val view=layoutInflater.inflate(R.layout.item_product,parent,false)
+        val view=layoutInflater.inflate(R.layout.item_user,parent,false)
         return MyViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return itemList.size
+       return itemList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item=itemList.get(position)
-        holder.itemView.tvProductName.text=item.productName
-        holder.itemView.tvProductPrice.text=item.price
+        holder.itemView.tvUserName.text=item.userName
+        holder.itemView.tvPh.text=item.phone
     }
 
-    fun setData(newData:List<Product>){
+    fun setData(newData:List<User>){
         itemList.clear()
         itemList.addAll(newData)
         notifyDataSetChanged()
