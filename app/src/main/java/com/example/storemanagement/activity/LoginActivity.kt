@@ -43,6 +43,11 @@ class LoginActivity:BaseActivity() {
             loginViewModel.login(req)
         }
 
+        tvRegister.setOnClickListener {
+            startActivity(RegisterActivity.newIntent(this))
+            finish()
+        }
+
         loginViewModel.isLoading.observe(this, Observer { isLoading->
             if (isLoading){
                 //todo: show loading

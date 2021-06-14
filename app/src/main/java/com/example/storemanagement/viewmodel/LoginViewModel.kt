@@ -15,6 +15,7 @@ class LoginViewModel:BaseViewModel() {
     val user= MutableLiveData<User>()
 
     fun login(req: LoginRequest){
+        isLoading.value=true
         RestClient.getApiService()
             .login(req)
             .enqueue(object: Callback<LoginResponse> {

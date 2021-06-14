@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".activity.LoginActivity">
 
 
     <ImageView
@@ -83,6 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Register"
+        android:textAppearance="@style/text.normal"
+       android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@id/containerConfirmPassword"
         app:layout_constraintStart_toStartOf="@id/containerConfirmPassword"
         app:layout_constraintTop_toBottomOf="@id/containerConfirmPassword" />
