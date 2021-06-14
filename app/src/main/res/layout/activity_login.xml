@@ -79,7 +79,7 @@
         app:layout_constraintStart_toEndOf="@id/lblNoAccount"
         app:layout_constraintTop_toTopOf="@id/lblNoAccount"
 
-        />
+        android:layout_marginLeft="4dp" />
 
 
     <Button

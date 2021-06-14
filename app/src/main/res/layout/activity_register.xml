@@ -115,6 +115,6 @@
         app:layout_constraintStart_toEndOf="@id/lblAlreadyRegister"
         app:layout_constraintTop_toTopOf="@id/lblAlreadyRegister"
 
-        />
+        android:layout_marginLeft="4dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
