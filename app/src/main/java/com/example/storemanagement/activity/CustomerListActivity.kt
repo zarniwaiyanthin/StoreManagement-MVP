@@ -27,7 +27,7 @@ class CustomerListActivity:BaseActivity() {
         removeCustomerViewModel= RemoveCustomerViewModel()
 
         customerViewModel.customerList.observe(this, Observer {customerList->
-            userAdapter.setData(customerList)
+            userAdapter.setNewData(customerList)
         })
 
         customerViewModel.isLoading.observe(this, Observer{ isLoading->

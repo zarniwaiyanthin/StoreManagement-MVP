@@ -29,7 +29,7 @@ class ProductListActivity:BaseActivity() {
         rvProduct.adapter=productAdapter
 
         productViewModel.productList.observe(this, Observer { productList->
-            productAdapter.setData(productList)
+            productAdapter.setNewData(productList)
         })
 
         productViewModel.isLoading.observe(this, Observer { isLoading->

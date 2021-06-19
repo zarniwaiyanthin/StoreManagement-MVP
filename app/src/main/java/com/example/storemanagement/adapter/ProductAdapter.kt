@@ -8,31 +8,21 @@ import com.example.storemanagement.model.Product
 import com.example.storemanagement.R
 import kotlinx.android.synthetic.main.item_product.view.*
 
-class ProductAdapter:RecyclerView.Adapter<ProductAdapter.MyViewHolder>() {
-    private val itemList= mutableListOf<Product>()
-    class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
+class ProductAdapter:BaseAdapter<Product,ProductAdapter.ProductViewHolder>() {
+
+    class ProductViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val layoutInflater=LayoutInflater.from(parent.context)
         val view=layoutInflater.inflate(R.layout.item_product,parent,false)
-        return MyViewHolder(view)
+        return ProductViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val item=itemList.get(position)
-        holder.itemView.tvProductName.text=item.productName
+        holder.itemView.tvProductName.text=item.name
         holder.itemView.tvProductPrice.text=item.price
-    }
-
-    fun setData(newData:List<Product>){
-        itemList.clear()
-        itemList.addAll(newData)
-        notifyDataSetChanged()
     }
 }

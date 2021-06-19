@@ -1,23 +1,18 @@
 package com.example.storemanagement.adapter
 
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class BaseAdapter:RecyclerView.Adapter<BaseAdapter.MyViewHolder>(){
-    class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+abstract class BaseAdapter<T,VH:RecyclerView.ViewHolder>:RecyclerView.Adapter<VH>() {
 
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        TODO("Not yet implemented")
-    }
+    protected val itemList= mutableListOf<T>()
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return itemList.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    fun setNewData(newItems:List<T>){
+        itemList.clear()
+        itemList.addAll(newItems)
+        notifyDataSetChanged()
     }
 }

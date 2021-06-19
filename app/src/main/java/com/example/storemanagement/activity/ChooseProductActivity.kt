@@ -37,7 +37,7 @@ class ChooseProductActivity:BaseActivity() {
 
         productViewModel.productList.observe(this, Observer {
             if (userId>0){
-                chooseProductAdapter.setData(it)
+                chooseProductAdapter.setNewData(it)
             }
         })
 
