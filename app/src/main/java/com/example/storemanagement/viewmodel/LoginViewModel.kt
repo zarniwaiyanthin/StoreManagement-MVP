@@ -16,6 +16,8 @@ class LoginViewModel:BaseViewModel() {
 
     fun login(req: LoginRequest){
         isLoading.value=true
+        user.value=mockLogin()
+        return
         RestClient.getApiService()
             .login(req)
             .enqueue(object: Callback<LoginResponse> {
@@ -38,4 +40,6 @@ class LoginViewModel:BaseViewModel() {
                 }
             })
     }
+
+    private fun mockLogin()=User(11)
 }

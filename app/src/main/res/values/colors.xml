@@ -11,4 +11,5 @@
     <color name="small_text_color">#605F5F</color>
     <color name="bg_icon_background">#E1E1E1</color>
     <color name="ic_tint">#F5A28D</color>
+    <color name="text_color_grey">#5E5E5E</color>
 </resources>

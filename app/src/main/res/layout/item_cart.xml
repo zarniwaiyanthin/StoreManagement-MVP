@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/containerCartItem"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_cart"
+    android:layout_margin="@dimen/size8"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <TextView
     android:id="@+id/tvPName"
-    android:layout_width="wrap_content"
+    android:layout_width="@dimen/size0"
     android:layout_height="wrap_content"
     android:text="@string/thermometer"
-    style="@style/text.normal"
+    style="@style/text.title"
+    android:layout_marginTop="@dimen/size8"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginLeft="@dimen/size16" />
 
     <TextView
         android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/size0"
         android:layout_height="wrap_content"
         android:text="@string/k_79_000"
-        style="@style/text.small"
+        style="@style/text.subTitle"
+        android:layout_marginLeft="@dimen/size16"
+        app:layout_goneMarginTop="@dimen/size4"
         android:layout_marginTop="@dimen/size4"
+        android:textColor="@color/text_color_grey"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPName"/>
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivArrow"
         android:layout_width="@dimen/size0"
         android:layout_height="@dimen/size0"
         app:layout_constraintDimensionRatio="W,1:1"
-        android:src="@drawable/image_toggle"
+        app:srcCompat="@drawable/image_toggle"
+        android:tint="@color/tint_cart_icon"
         android:background="@drawable/background_color_toggle"
+        android:scaleType="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

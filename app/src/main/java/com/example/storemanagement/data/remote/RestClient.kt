@@ -6,6 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object RestClient {
 
@@ -16,7 +17,7 @@ object RestClient {
 
     private fun getRetrofit():Retrofit{
         return Retrofit.Builder()
-            .baseUrl("http://128.199.96.212/product-api")
+            .baseUrl("http://talentnest.com.mm/product-api/")
             .client(getClient())
             .addConverterFactory(getConverter())
             .build()
@@ -27,6 +28,9 @@ object RestClient {
         loggingInterceptor.level=HttpLoggingInterceptor.Level.BODY
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+                .callTimeout(60,TimeUnit.SECONDS)
+                .readTimeout(60,TimeUnit.SECONDS)
+                .connectTimeout(60,TimeUnit.SECONDS)
             .build()
 
     }

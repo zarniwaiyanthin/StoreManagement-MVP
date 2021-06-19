@@ -17,9 +17,11 @@ class SplashActivity:BaseActivity() {
         val handler=Handler(Looper.myLooper()!!)
         handler.postDelayed({
             if (userId>0){
-                startActivity(LoginActivity.newIntent(this))
+                startActivity(MainActivity.newIntent(this))
+                finish()
             }else{
-                //todo: go to login
+                startActivity(LoginActivity.newIntent(this))
+                finish()
             }
         },1000)
     }

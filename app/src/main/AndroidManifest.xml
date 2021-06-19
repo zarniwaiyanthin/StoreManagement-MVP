@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.storemanagement">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +14,7 @@
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.AddProductActivity" />
         <activity android:name=".activity.AddCustomerActivity" />
-        <activity android:name=".activity.ChooseProductActivity" />
+        <activity android:name=".activity.CartActivity" />
         <activity android:name=".activity.ProductListActivity" />
         <activity android:name=".activity.CustomerListActivity" />
         <activity android:name=".activity.SplashActivity">

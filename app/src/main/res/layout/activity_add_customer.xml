@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbAddUser"
+        android:id="@+id/tbAddCustomer"
         android:layout_width="@dimen/size0"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -18,12 +18,12 @@
         app:navigationIcon="@drawable/ic_baseline_arrow_back_ios_24">
 
         <TextView
-            android:id="@+id/tvAddUser"
+            android:id="@+id/tvAddCustomer"
             style="@style/text.title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/add_user" />
+            android:text="@string/add_customer" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -38,7 +38,7 @@
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tbAddUser">
+        app:layout_constraintTop_toBottomOf="@id/tbAddCustomer">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etCustomerName"

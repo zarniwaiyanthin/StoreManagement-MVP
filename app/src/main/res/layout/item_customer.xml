@@ -2,24 +2,30 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/size8"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size16"
+        android:layout_marginTop="@dimen/size8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/maung_maung"
-        style="@style/text.normal"/>
+        style="@style/text.title"/>
 
     <TextView
         android:id="@+id/tvPh"
         android:layout_marginTop="@dimen/size4"
-        style="@style/text.small"
+        style="@style/text.subTitle"
+        android:layout_marginLeft="@dimen/size16"
+        app:layout_goneMarginTop="@dimen/size4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/_09412154325"
+        android:textColor="@color/text_color_grey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
@@ -31,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <view
+    <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -30,18 +30,13 @@ class RegisterActivity:BaseActivity() {
         val confirmPassword=etConfirmPassword.text.toString()
 
         btnRegister.setOnClickListener {
-            if (password=="" || password==null || confirmPassword=="" || confirmPassword==null){
-                Toast.makeText(this, "Please Enter a Password", Toast.LENGTH_SHORT).show()
-            }else if (password!=confirmPassword){
-                Toast.makeText(this, "Password and Confirm Password must be the same", Toast.LENGTH_SHORT).show()
-            }else{
                 val req=RegisterRequest(
                         name = name,
                         password = password,
                         deviceToken = "Sample Device Token"
                 )
                 registerViewModel.registerUser(req)
-            }
+
         }
 
         registerViewModel.responseMessage.observe(this, Observer {

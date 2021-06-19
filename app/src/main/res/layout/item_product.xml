@@ -3,28 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:layout_margin="@dimen/size8"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/tvProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size16"
+        android:layout_marginTop="@dimen/size8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/thermometer"
-        style="@style/text.normal"/>
+        style="@style/text.title"/>
 
     <TextView
         android:id="@+id/tvProductPrice"
+        android:layout_marginLeft="@dimen/size16"
         android:layout_marginTop="@dimen/size4"
-        style="@style/text.small"
+        style="@style/text.subTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/k_79_000"
+        android:textColor="@color/text_color_grey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
 
-    <view
+    <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider"
         app:layout_constraintBottom_toBottomOf="parent"

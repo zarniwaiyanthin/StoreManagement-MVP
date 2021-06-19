@@ -4,6 +4,21 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <Button
+        android:id="@+id/btnAddProduct"
+        android:layout_width="@dimen/size0"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size8"
+        android:layout_marginTop="@dimen/size8"
+        android:layout_marginEnd="@dimen/size8"
+        android:backgroundTint="@color/teal_200"
+        android:text="@string/add_product"
+        android:textAppearance="@style/text.normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containerPh" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbAddProduct"
         android:layout_width="@dimen/size0"
@@ -56,7 +71,7 @@
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containerCustomerName"
+        app:layout_constraintTop_toBottomOf="@id/containerProductName"
         android:layout_marginLeft="@dimen/size8">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -65,19 +80,5 @@
             android:layout_height="wrap_content"
             android:hint="@string/price" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btnAddProduct"
-        android:layout_width="@dimen/size0"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size8"
-        android:layout_marginTop="@dimen/size8"
-        android:layout_marginEnd="@dimen/size8"
-        android:backgroundTint="@color/teal_200"
-        android:text="@string/add_product"
-        android:textAppearance="@style/text.normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containerPh" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

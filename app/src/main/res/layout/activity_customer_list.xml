@@ -7,7 +7,7 @@
     android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbUserList"
+        android:id="@+id/tbCustomerList"
         android:layout_width="@dimen/size0"
         android:theme="?attr/actionBarTheme"
         android:minHeight="?attr/actionBarSize"
@@ -23,7 +23,7 @@
             android:id="@+id/tvUserList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/users_list"
+            android:text="@string/customers_list"
             style="@style/text.title"
             android:gravity="center"
             />
@@ -32,12 +32,26 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCustomer"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/size0"
         android:layout_height="@dimen/size0"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbUserList"
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        app:layout_constraintStart_toStartOf="@id/glBegin"
+        app:layout_constraintTop_toBottomOf="@+id/tbCustomerList"
         tools:listitem="@layout/item_customer" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/size16"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/size16"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
