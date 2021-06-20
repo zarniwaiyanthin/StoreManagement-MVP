@@ -3,6 +3,7 @@ package com.example.storemanagement.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.storemanagement.model.Customer
 
 abstract class BaseAdapter<T,VH:RecyclerView.ViewHolder>:RecyclerView.Adapter<VH>() {
 
@@ -21,5 +22,9 @@ abstract class BaseAdapter<T,VH:RecyclerView.ViewHolder>:RecyclerView.Adapter<VH
         itemList.clear()
         itemList.addAll(newItems)
         notifyDataSetChanged()
+    }
+
+    fun getItemAt(position:Int): T {
+        return itemList[position]
     }
 }
