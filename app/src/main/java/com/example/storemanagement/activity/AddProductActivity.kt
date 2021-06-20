@@ -28,13 +28,14 @@ class AddProductActivity:BaseActivity() {
 
         productViewModel=ViewModelProvider(this).get(ProductViewModel::class.java)
 
-        val name=etProductName.text.toString()
-        val price=etPrice.text.toString().toIntOrNull()
-
         val pref=getSharedPreferences(Constants.SHARE_PREF_NAME, Context.MODE_PRIVATE)
         val userId=pref.getInt(Constants.KEY_USER_ID,-1)
 
         btnAddProduct.setOnClickListener {
+
+            val name=etProductName.text.toString()
+            val price=etPrice.text.toString().toIntOrNull()
+            
             if (userId>0){
                 val req=AddProductRequest(
                         name = name,

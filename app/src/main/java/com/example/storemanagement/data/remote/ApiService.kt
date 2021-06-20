@@ -8,7 +8,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ApiService {
-    @POST("login")
+    @POST("user/login")
     fun login(@Body req:LoginRequest):Call<LoginResponse>
 
     @POST("customer/list")
