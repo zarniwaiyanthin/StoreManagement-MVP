@@ -3,6 +3,7 @@ package com.example.storemanagement.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -47,9 +48,8 @@ class CustomerListActivity:BaseActivity(),CustomerListListener {
         val swipeToDeleteListener=object :SwipeToDeleteListener(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position=viewHolder.adapterPosition
-                customerViewModel.removeCustomer(position)
-//                val item=customerAdapter.getItemAt(position)
-//                item.id?.let { removeCustomer(it) }
+                val item=customerAdapter.getItemAt(position)
+                item.id?.let { removeCustomer(it) }
                 customerAdapter.deleteItem(position)
             }
         }
@@ -63,9 +63,9 @@ class CustomerListActivity:BaseActivity(),CustomerListListener {
 
         customerViewModel.isLoading.observe(this, Observer{ isLoading->
             if (isLoading){
-                //todo: show loading
+                progressBar.visibility= View.VISIBLE
             }else{
-                //todo: hide loading
+                progressBar.visibility=View.INVISIBLE
             }
         })
 
@@ -106,9 +106,9 @@ class CustomerListActivity:BaseActivity(),CustomerListListener {
 
         customerViewModel.isLoading.observe(this, Observer {
             if(it){
-                //todo: show loading
+                progressBar.visibility=View.VISIBLE
             }else{
-                //todo: hide loading
+                progressBar.visibility=View.INVISIBLE
             }
         })
 

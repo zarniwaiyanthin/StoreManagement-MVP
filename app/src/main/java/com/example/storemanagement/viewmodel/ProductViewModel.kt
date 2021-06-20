@@ -17,8 +17,6 @@ class ProductViewModel:BaseViewModel() {
 
     fun getProductList(userId:Int){
         isLoading.value=true
-        productList.value=generateProducts()
-        return
         RestClient.getApiService()
                 .getProductList(userId)
                 .enqueue(object :Callback<ProductListResponse>{
@@ -32,7 +30,7 @@ class ProductViewModel:BaseViewModel() {
                             isLoading.value=false
                             response.body()?.let { body->
                                 productList.value=body.data?: listOf()
-                                error.value=body.error?.firstOrNull()?.errorMessage?:"Unknown Error"
+ //                               error.value=body.error?.firstOrNull()?.errorMessage?:"Unknown Error"
                             }
                         }
                     }
@@ -76,7 +74,7 @@ class ProductViewModel:BaseViewModel() {
                             isLoading.value=false
                             response.body()?.let {body->
                                 responseMessage.value=body.responseMessage?:"N/A"
-                                error.value=body.error?.firstOrNull()?.errorMessage?:"Unknown Error"
+//                                error.value=body.error?.firstOrNull()?.errorMessage?:"Unknown Error"
                             }
                         }
                     }
@@ -85,8 +83,6 @@ class ProductViewModel:BaseViewModel() {
 
     fun removeProduct(productId:Int){
         isLoading.value=true
-        generateProducts().removeAt(productId)
-        return
         RestClient.getApiService()
                 .removeProduct(productId=productId)
                 .enqueue(object :Callback<RemoveResponse>{
@@ -100,17 +96,10 @@ class ProductViewModel:BaseViewModel() {
                         if (response.isSuccessful){
                             response.body()?.let {
                                 responseMessage.value=it.responseMessage
-                                error.value=it.error?.firstOrNull()?.errorMessage?:"Unknown Error"
+ //                               error.value=it.error?.firstOrNull()?.errorMessage?:"Unknown Error"
                             }
                         }
                     }
                 })
     }
-
-    private fun generateProducts()= mutableListOf<Product>(
-            Product("1","zar","143241432"),
-            Product("2","lu","143241432"),
-            Product("3","mg","143241432"),
-            Product("4","mu","143241432")
-    )
 }

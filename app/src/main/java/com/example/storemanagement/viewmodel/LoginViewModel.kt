@@ -31,7 +31,7 @@ class LoginViewModel:BaseViewModel() {
                     if (response.isSuccessful){
                         isLoading.value=false
                         response.body()?.let {body->
-                            error.value=body.error?.firstOrNull()?.errorMessage?:"Unknown Error"
+//                            error.value=body.error?.firstOrNull()?.errorMessage?:"Unknown Error"
                             user.value=body.data?: User()
                         }
                     }

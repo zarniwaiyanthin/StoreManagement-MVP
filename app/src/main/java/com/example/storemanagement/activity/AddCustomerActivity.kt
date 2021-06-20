@@ -2,7 +2,9 @@ package com.example.storemanagement.activity
 
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.storemanagement.R
@@ -51,9 +53,9 @@ class AddCustomerActivity:BaseActivity(){
 
         customerViewModel.isLoading.observe(this, Observer {
             if (it){
-                //todo: show loading
+                progressBar.visibility= View.VISIBLE
             }else{
-                //todo: hide loading
+                progressBar.visibility=View.INVISIBLE
             }
         })
 

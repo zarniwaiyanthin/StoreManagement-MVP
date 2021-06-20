@@ -3,6 +3,7 @@ package com.example.storemanagement.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -50,9 +51,9 @@ class ProductListActivity:BaseActivity(),ProductListListener {
 
         productViewModel.isLoading.observe(this, Observer { isLoading->
             if (isLoading){
-                //todo: show loading
+                progressBar.visibility= View.VISIBLE
             }else{
-                //todo:hide loading
+                progressBar.visibility=View.INVISIBLE
             }
         })
 
@@ -72,9 +73,8 @@ class ProductListActivity:BaseActivity(),ProductListListener {
         val swipeToDeleteListener=object :SwipeToDeleteListener(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position=viewHolder.adapterPosition
-                productViewModel.removeProduct(position)
-//                val item=productAdapter.getItemAt(position)
-//                removeProduct(item.productId!!.toInt())
+                val item=productAdapter.getItemAt(position)
+                removeProduct(item.productId!!.toInt())
                 productAdapter.deleteItem(position)
             }
         }
@@ -98,9 +98,9 @@ class ProductListActivity:BaseActivity(),ProductListListener {
 
         productViewModel.isLoading.observe(this, Observer {
             if(it){
-                //todo: show loading
+                progressBar.visibility=View.VISIBLE
             }else{
-                //todo: hide loading
+                progressBar.visibility=View.INVISIBLE
             }
         })
 
