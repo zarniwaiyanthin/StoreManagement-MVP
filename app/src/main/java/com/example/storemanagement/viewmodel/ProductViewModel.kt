@@ -17,6 +17,8 @@ class ProductViewModel:BaseViewModel() {
 
     fun getProductList(userId:Int){
         isLoading.value=true
+        productList.value=generateProducts()
+        return
         RestClient.getApiService()
                 .getProductList(userId)
                 .enqueue(object :Callback<ProductListResponse>{
@@ -81,10 +83,12 @@ class ProductViewModel:BaseViewModel() {
                 })
     }
 
-    fun removeProduct(productId:Int,customerId:Int){
+    fun removeProduct(productId:Int){
         isLoading.value=true
+        generateProducts().removeAt(productId)
+        return
         RestClient.getApiService()
-                .removeProduct(productId=productId,customerId = customerId)
+                .removeProduct(productId=productId)
                 .enqueue(object :Callback<RemoveResponse>{
                     override fun onFailure(call: Call<RemoveResponse>, t: Throwable) {
                         isLoading.value=false
@@ -102,4 +106,11 @@ class ProductViewModel:BaseViewModel() {
                     }
                 })
     }
+
+    private fun generateProducts()= mutableListOf<Product>(
+            Product("1","zar","143241432"),
+            Product("2","lu","143241432"),
+            Product("3","mg","143241432"),
+            Product("4","mu","143241432")
+    )
 }

@@ -27,6 +27,7 @@ class CustomerListActivity:BaseActivity(),CustomerListListener {
     }
 
     private lateinit var customerViewModel: CustomerViewModel
+    private var userId:Int?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,15 +40,17 @@ class CustomerListActivity:BaseActivity(),CustomerListListener {
         customerViewModel= ViewModelProvider(this).get(CustomerViewModel::class.java)
 
         val pref=getSharedPreferences(Constants.SHARE_PREF_NAME, Context.MODE_PRIVATE)
-        val userId=pref.getInt(Constants.KEY_USER_ID,-1)
+        userId=pref.getInt(Constants.KEY_USER_ID,-1)
 
-        customerViewModel.getCustomerList(userId)
+        customerViewModel.getCustomerList(userId!!)
 
         val swipeToDeleteListener=object :SwipeToDeleteListener(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position=viewHolder.adapterPosition
-                val item=customerAdapter.getItemAt(position)
-                item.id?.let { removeCustomer(it) }
+                customerViewModel.removeCustomer(position)
+//                val item=customerAdapter.getItemAt(position)
+//                item.id?.let { removeCustomer(it) }
+                customerAdapter.deleteItem(position)
             }
         }
 
@@ -87,6 +90,11 @@ class CustomerListActivity:BaseActivity(),CustomerListListener {
             startActivity(AddCustomerActivity.newIntent(this))
             true
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        customerViewModel.getCustomerList(userId!!)
     }
 
     private fun removeCustomer(customerId:Int){

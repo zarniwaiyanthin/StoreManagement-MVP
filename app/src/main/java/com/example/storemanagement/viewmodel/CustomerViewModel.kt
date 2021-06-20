@@ -20,6 +20,8 @@ class CustomerViewModel:BaseViewModel() {
 
     fun getCustomerList(userId:Int){
         isLoading.value=true
+        customerList.value=generateCustomers()
+        return
         RestClient.getApiService()
             .getCustomerList(userId)
             .enqueue(object :Callback<CustomerListResponse>{
@@ -67,6 +69,8 @@ class CustomerViewModel:BaseViewModel() {
 
     fun removeCustomer(customerId:Int){
         isLoading.value=true
+        generateCustomers().removeAt(customerId)
+        return
         RestClient.getApiService()
                 .removeCustomer(customerId)
                 .enqueue(object:retrofit2.Callback<RemoveResponse>{
@@ -80,7 +84,7 @@ class CustomerViewModel:BaseViewModel() {
                         if (response.isSuccessful){
                             response.body()?.let {
                                 responseMessage.value=it.responseMessage
-                                isDelete.value=it.data
+                                isDelete.value=it.data?:false
                                 error.value=it.error?.firstOrNull()?.errorMessage?:"Unknown Error"
                             }
                         }else{
@@ -89,4 +93,16 @@ class CustomerViewModel:BaseViewModel() {
                     }
                 })
     }
+
+    private fun generateCustomers()= mutableListOf<Customer>(
+            Customer(1,"zar","143241432"),
+            Customer(2,"lu","143241432"),
+            Customer(3,"mg","143241432"),
+            Customer(4,"mu","143241432"),
+            Customer(5,"Oo","143241432"),
+            Customer(6,"shit","143241432"),
+            Customer(7,"holy","143241432"),
+            Customer(8,"hi","143241432"),
+            Customer(9,"he","143241432")
+    )
 }

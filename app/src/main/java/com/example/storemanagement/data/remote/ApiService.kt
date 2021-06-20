@@ -27,7 +27,7 @@ interface ApiService {
     fun removeCustomer(@Header("customerId") customerId:Int):Call<RemoveResponse>
 
     @POST("product/remove")
-    fun removeProduct(@Header("productId") productId:Int, @Header("customerId") customerId: Int):Call<RemoveResponse>
+    fun removeProduct(@Header("productId") productId:Int):Call<RemoveResponse>
 
     @POST("cart/add")
     fun add2Cart(@Body req:Add2CartRequest):Call<Add2CartResponse>
