@@ -17,8 +17,6 @@ class ProductViewModel:BaseViewModel() {
 
     fun getProductList(userId:Int){
         isLoading.value=true
-        productList.value=generateProductList()
-        return
         RestClient.getApiService()
                 .getProductList(userId)
                 .enqueue(object :Callback<ProductListResponse>{
@@ -104,13 +102,4 @@ class ProductViewModel:BaseViewModel() {
                     }
                 })
     }
-
-    private fun generateProductList()= listOf<Product>(Product("1","lee","000093241"),
-            Product("2","low","0921412341"),
-            Product("2","low","0921412341"),
-            Product("2","low","0921412341"),
-            Product("2","low","0921412341"),
-            Product("2","low","0921412341"),
-            Product("2","low","0921412341"),
-            Product("2","low","0921412341"))
 }
