@@ -1,4 +1,4 @@
-package com.example.storemanagement.activity
+package com.example.storemanagement.view
 
 import android.content.Context
 import android.content.Intent
@@ -12,14 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storemanagement.adapter.ProductAdapter
 import com.example.storemanagement.R
+import com.example.storemanagement.contractor.ProductView
 import com.example.storemanagement.listener.ProductListListener
 import com.example.storemanagement.listener.SwipeToDeleteListener
 import com.example.storemanagement.model.Product
 import com.example.storemanagement.utilities.Constants
-import com.example.storemanagement.viewmodel.ProductViewModel
+import com.example.storemanagement.presenter.ProductPresenterImpl
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_product_list.*
+import kotlinx.android.synthetic.main.activity_product_list.progressBar
 
-class ProductListActivity:BaseActivity(),ProductListListener {
+class ProductListActivity:BaseActivity(),ProductListListener,ProductView {
 
     companion object{
         fun newIntent(context: Context):Intent{
@@ -27,39 +30,25 @@ class ProductListActivity:BaseActivity(),ProductListListener {
         }
     }
 
-    private lateinit var productViewModel: ProductViewModel
+    private lateinit var productPresenterImpl: ProductPresenterImpl
+    private lateinit var productAdapter:ProductAdapter
     private var userId:Int?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_list)
 
-        productViewModel= ViewModelProvider(this).get(ProductViewModel::class.java)
+        productPresenterImpl= ProductPresenterImpl()
+        productPresenterImpl.registerView(this)
 
-        val productAdapter= ProductAdapter(this)
+        productAdapter= ProductAdapter(this)
         rvProduct.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         rvProduct.adapter=productAdapter
 
         val pref=getSharedPreferences(Constants.SHARE_PREF_NAME, Context.MODE_PRIVATE)
         userId=pref.getInt(Constants.KEY_USER_ID,-1)
 
-        productViewModel.getProductList(userId!!)
-
-        productViewModel.productList.observe(this, Observer { productList->
-            productAdapter.setNewData(productList)
-        })
-
-        productViewModel.isLoading.observe(this, Observer { isLoading->
-            if (isLoading){
-                progressBar.visibility= View.VISIBLE
-            }else{
-                progressBar.visibility=View.INVISIBLE
-            }
-        })
-
-        productViewModel.error.observe(this, Observer { error->
-            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
-        })
+        productPresenterImpl.getProductList(userId!!)
 
         tbProductList.setNavigationOnClickListener {
             onBackPressed()
@@ -86,30 +75,48 @@ class ProductListActivity:BaseActivity(),ProductListListener {
 
     override fun onStart() {
         super.onStart()
-        productViewModel.getProductList(userId!!)
+        productPresenterImpl.getProductList(userId!!)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        productPresenterImpl.unregisterView()
     }
 
     private fun removeProduct(productId:Int){
-        productViewModel.removeProduct(productId=productId)
-
-        productViewModel.responseMessage.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        })
-
-        productViewModel.isLoading.observe(this, Observer {
-            if(it){
-                progressBar.visibility=View.VISIBLE
-            }else{
-                progressBar.visibility=View.INVISIBLE
-            }
-        })
-
-        productViewModel.error.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        })
+        productPresenterImpl.removeProduct(productId=productId)
     }
 
     override fun onProductClick(item: Product) {
         TODO("Not yet implemented")
+    }
+
+    override fun showResponseMessage(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showError(error: String) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showLoading() {
+        progressBar.visibility=View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        progressBar.visibility = View.INVISIBLE
+    }
+
+    override fun delete(isDelete: Boolean?) {
+        if (isDelete!!){
+            val pref=getSharedPreferences(Constants.SHARE_PREF_NAME, Context.MODE_PRIVATE)
+            val userId=pref.getInt(Constants.KEY_USER_ID,-1)
+
+            productPresenterImpl.getProductList(userId)
+        }
+    }
+
+    override fun returnProductList(productList: List<Product>) {
+        productAdapter.setNewData(productList)
     }
 }

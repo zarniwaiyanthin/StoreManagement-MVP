@@ -1,6 +1,8 @@
-package com.example.storemanagement.viewmodel
+package com.example.storemanagement.presenter
 
 import androidx.lifecycle.MutableLiveData
+import com.example.storemanagement.contractor.LoginPresenter
+import com.example.storemanagement.contractor.LoginView
 import com.example.storemanagement.data.remote.RestClient
 import com.example.storemanagement.data.request.LoginRequest
 import com.example.storemanagement.model.LoginResponse
@@ -9,19 +11,28 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel:BaseViewModel() {
-    val isLoading= MutableLiveData<Boolean>()
-    val error= MutableLiveData<String>()
-    val user= MutableLiveData<User>()
+class LoginPresenterImpl:LoginPresenter {
 
-    fun login(req: LoginRequest){
-        isLoading.value=true
+    private var view:LoginView?=null
+
+    override fun registerView(view: LoginView) {
+        this.view=view
+    }
+
+    override fun unregisterView() {
+        this.view=null
+    }
+
+    override fun login(req: LoginRequest){
+        view?.showLoading()
+        view?.returnUser(User(2))
+        return
         RestClient.getApiService()
             .login(req)
             .enqueue(object: Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    isLoading.value=false
-                    error.value=t.message?:"Unknown Error"
+                    view?.hideLoading()
+                    view?.showError(t.message?:"Unknown Error")
                 }
 
                 override fun onResponse(
@@ -29,10 +40,9 @@ class LoginViewModel:BaseViewModel() {
                     response: Response<LoginResponse>
                 ) {
                     if (response.isSuccessful){
-                        isLoading.value=false
+                        view?.hideLoading()
                         response.body()?.let {body->
-//                            error.value=body.error?.firstOrNull()?.errorMessage?:"Unknown Error"
-                            user.value=body.data?: User()
+                            view?.returnUser(body.data?: User())
                         }
                     }
                 }

@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storemanagement.model.Product
 import com.example.storemanagement.R
-import com.example.storemanagement.activity.ProductListActivity
 import com.example.storemanagement.listener.ProductListListener
 import kotlinx.android.synthetic.main.item_product.view.*
 

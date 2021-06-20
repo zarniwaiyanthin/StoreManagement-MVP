@@ -1,4 +1,4 @@
-package com.example.storemanagement.activity
+package com.example.storemanagement.view
 
 import androidx.appcompat.app.AppCompatActivity
 

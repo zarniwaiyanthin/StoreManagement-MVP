@@ -1,4 +1,4 @@
-package com.example.storemanagement.activity
+package com.example.storemanagement.view
 
 import android.content.Context
 import android.os.Bundle

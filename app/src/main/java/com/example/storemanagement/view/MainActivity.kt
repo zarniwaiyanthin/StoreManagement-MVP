@@ -1,8 +1,7 @@
-package com.example.storemanagement.activity
+package com.example.storemanagement.view
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.storemanagement.R
 import kotlinx.android.synthetic.main.activity_main.*

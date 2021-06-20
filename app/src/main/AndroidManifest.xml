@@ -11,21 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StoreManagement">
-        <activity android:name=".activity.MainActivity"/>
-        <activity android:name=".activity.AddProductActivity" />
-        <activity android:name=".activity.AddCustomerActivity" />
-        <activity android:name=".activity.CartActivity" />
-        <activity android:name=".activity.ProductListActivity" />
-        <activity android:name=".activity.CustomerListActivity" />
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".view.MainActivity"/>
+        <activity android:name=".view.AddProductActivity" />
+        <activity android:name=".view.AddCustomerActivity" />
+        <activity android:name=".view.CartActivity" />
+        <activity android:name=".view.ProductListActivity" />
+        <activity android:name=".view.CustomerListActivity" />
+        <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.RegisterActivity" />
     </application>
 
 </manifest>

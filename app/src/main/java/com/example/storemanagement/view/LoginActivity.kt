@@ -1,21 +1,22 @@
-package com.example.storemanagement.activity
+package com.example.storemanagement.view
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.SyncStateContract
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.storemanagement.R
+import com.example.storemanagement.contractor.LoginView
 import com.example.storemanagement.data.request.LoginRequest
+import com.example.storemanagement.model.User
 import com.example.storemanagement.utilities.Constants
-import com.example.storemanagement.viewmodel.BaseViewModel
-import com.example.storemanagement.viewmodel.LoginViewModel
+import com.example.storemanagement.presenter.LoginPresenterImpl
+import kotlinx.android.synthetic.main.activity_cart.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.progressBar
 
-class LoginActivity:BaseActivity() {
+class LoginActivity:BaseActivity(),LoginView {
 
     companion object{
         fun newIntent(context: Context):Intent{
@@ -23,13 +24,14 @@ class LoginActivity:BaseActivity() {
         }
     }
 
-    private lateinit var loginViewModel:LoginViewModel
+    private lateinit var loginPresenterImpl:LoginPresenterImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        loginViewModel= LoginViewModel()
+        loginPresenterImpl= LoginPresenterImpl()
+        loginPresenterImpl.registerView(this)
 
         btnLogin.setOnClickListener {
             val name=etName.text.toString()
@@ -43,7 +45,7 @@ class LoginActivity:BaseActivity() {
                             userName = name,
                             password = password
                     )
-                    loginViewModel.login(req)
+                    loginPresenterImpl.login(req)
                 }
             }
         }
@@ -52,29 +54,34 @@ class LoginActivity:BaseActivity() {
             startActivity(RegisterActivity.newIntent(this))
             finish()
         }
+    }
 
-        loginViewModel.isLoading.observe(this, Observer { isLoading->
-            if (isLoading){
-                progressBar.visibility= View.VISIBLE
-            }else{
-                progressBar.visibility=View.INVISIBLE
-            }
-        })
+    override fun onDestroy() {
+        super.onDestroy()
+        loginPresenterImpl.unregisterView()
+    }
 
-        loginViewModel.error.observe(this, Observer { error->
-            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
-        })
+    override fun showError(error: String) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+    }
 
-        loginViewModel.user.observe(this, Observer { user->
-            val userId=user.userId?:-1
-            if (userId>0){
-                val pref=getSharedPreferences(Constants.SHARE_PREF_NAME, Context.MODE_PRIVATE)
-                    .edit()
-                    .putInt(Constants.KEY_USER_ID,userId)
-                    .apply()
-                startActivity(MainActivity.newIntent(this))
-                finish()
-            }
-        })
+    override fun showLoading() {
+        progressBar.visibility=View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        progressBar.visibility = View.INVISIBLE
+    }
+
+    override fun returnUser(user: User) {
+        val userId=user.userId?:-1
+        if (userId>0){
+            val pref=getSharedPreferences(Constants.SHARE_PREF_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putInt(Constants.KEY_USER_ID,userId)
+                .apply()
+            startActivity(MainActivity.newIntent(this))
+            finish()
+        }
     }
 }

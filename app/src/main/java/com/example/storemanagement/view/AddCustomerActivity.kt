@@ -1,19 +1,20 @@
-package com.example.storemanagement.activity
+package com.example.storemanagement.view
 
 import android.content.Context
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.storemanagement.R
+import com.example.storemanagement.contractor.AddCustomerView
 import com.example.storemanagement.data.request.AddCustomerRequest
+import com.example.storemanagement.presenter.AddCustomerPresenterImpl
 import com.example.storemanagement.utilities.Constants
-import com.example.storemanagement.viewmodel.CustomerViewModel
+import com.example.storemanagement.presenter.CustomerPresenterImpl
 import kotlinx.android.synthetic.main.activity_add_customer.*
 
-class AddCustomerActivity:BaseActivity(){
+class AddCustomerActivity:BaseActivity(),AddCustomerView{
 
     companion object{
         fun newIntent(context: Context):Intent{
@@ -21,13 +22,14 @@ class AddCustomerActivity:BaseActivity(){
         }
     }
 
-    private lateinit var customerViewModel:CustomerViewModel
+    private lateinit var addCustomerPresenterImpl: AddCustomerPresenterImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_customer)
 
-        customerViewModel= CustomerViewModel()
+        addCustomerPresenterImpl= AddCustomerPresenterImpl()
+        addCustomerPresenterImpl.registerView(this)
 
         val pref=getSharedPreferences(Constants.SHARE_PREF_NAME, Context.MODE_PRIVATE)
         val userId=pref.getInt(Constants.KEY_USER_ID,-1)
@@ -43,28 +45,33 @@ class AddCustomerActivity:BaseActivity(){
                         phoneNo = phone,
                         userId = userId
                 )
-                customerViewModel.addCustomer(req)
+                addCustomerPresenterImpl.addCustomer(req)
             }
         }
-
-        customerViewModel.responseMessage.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        })
-
-        customerViewModel.isLoading.observe(this, Observer {
-            if (it){
-                progressBar.visibility= View.VISIBLE
-            }else{
-                progressBar.visibility=View.INVISIBLE
-            }
-        })
-
-        customerViewModel.error.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        })
 
         tbAddCustomer.setNavigationOnClickListener {
             onBackPressed()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        addCustomerPresenterImpl.unregisterView()
+    }
+
+    override fun showResponseMessage(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showError(error: String) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showLoading() {
+        progressBar.visibility=View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        progressBar.visibility=View.INVISIBLE
     }
 }

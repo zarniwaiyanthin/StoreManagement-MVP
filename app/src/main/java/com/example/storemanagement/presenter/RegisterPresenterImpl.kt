@@ -1,8 +1,8 @@
-package com.example.storemanagement.viewmodel
+package com.example.storemanagement.presenter
 
-import android.net.DnsResolver
-import androidx.appcompat.view.ActionMode
 import androidx.lifecycle.MutableLiveData
+import com.example.storemanagement.contractor.RegisterPresenter
+import com.example.storemanagement.contractor.RegisterView
 import com.example.storemanagement.data.remote.RestClient
 import com.example.storemanagement.data.request.RegisterRequest
 import com.example.storemanagement.model.RegisterResponse
@@ -10,27 +10,33 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RegisterViewModel:BaseViewModel() {
-    val isLoading=MutableLiveData<Boolean>()
-    val error=MutableLiveData<String>()
-    val responseMessage=MutableLiveData<String>()
+class RegisterPresenterImpl:RegisterPresenter {
 
-    fun registerUser(req:RegisterRequest){
-        isLoading.value=true
+    private var view:RegisterView?=null
+
+    override fun registerView(view: RegisterView) {
+        this.view=view
+    }
+
+    override fun unregisterView() {
+        this.view=null
+    }
+
+    override fun registerUser(req:RegisterRequest){
+        view?.showLoading()
         RestClient.getApiService()
                 .registerUser(req)
                 .enqueue(object :Callback<RegisterResponse>{
                     override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                        isLoading.value=false
-                        error.value=t.message?:"Unknown Error"
+                        view?.hideLoading()
+                        view?.showError(t.message?:"Unknown Error")
                     }
 
                     override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
-                        isLoading.value=false
+                        view?.hideLoading()
                         if (response.isSuccessful){
                             response.body()?.let {
-                                responseMessage.value=it.responseMessage
-//                                error.value=it.error?.firstOrNull()?.errorMessage?:"Unknown Error"
+                                view?.showResponseMessage(it.responseMessage)
                             }
                         }
                     }

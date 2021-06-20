@@ -1,4 +1,4 @@
-package com.example.storemanagement.activity
+package com.example.storemanagement.view
 
 import android.content.Context
 import android.content.Intent
@@ -7,24 +7,28 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.storemanagement.R
+import com.example.storemanagement.contractor.RegisterView
 import com.example.storemanagement.data.request.RegisterRequest
-import com.example.storemanagement.viewmodel.RegisterViewModel
+import com.example.storemanagement.presenter.RegisterPresenterImpl
+import kotlinx.android.synthetic.main.activity_product_list.*
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.progressBar
 
-class RegisterActivity:BaseActivity() {
+class RegisterActivity:BaseActivity(),RegisterView {
     companion object{
         fun newIntent(context: Context):Intent{
             return Intent(context,RegisterActivity::class.java)
         }
     }
 
-    private lateinit var registerViewModel: RegisterViewModel
+    private lateinit var registerPresenterImpl: RegisterPresenterImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        registerViewModel= RegisterViewModel()
+        registerPresenterImpl= RegisterPresenterImpl()
+        registerPresenterImpl.registerView(this)
 
         btnRegister.setOnClickListener {
 
@@ -43,26 +47,30 @@ class RegisterActivity:BaseActivity() {
                             password = password,
                             deviceToken = "Sample Device Token"
                     )
-                    registerViewModel.registerUser(req)
+                    registerPresenterImpl.registerUser(req)
                 }
             }
         }
+    }
 
-        registerViewModel.responseMessage.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        })
+    override fun onDestroy() {
+        super.onDestroy()
+        registerPresenterImpl.unregisterView()
+    }
 
-        registerViewModel.isLoading.observe(this, Observer {
-            if (it){
-                progressBar.visibility= View.VISIBLE
-            }else{
-                progressBar.visibility=View.INVISIBLE
-            }
-        })
+    override fun showResponseMessage(message: String?) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 
-        registerViewModel.error.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        })
+    override fun showError(error: String) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+    }
 
+    override fun showLoading() {
+        progressBar.visibility=View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        progressBar.visibility = View.INVISIBLE
     }
 }
