@@ -9,12 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.storemanagement.adapter.ProductAdapter
 import com.example.storemanagement.R
-import com.example.storemanagement.data.request.AddProductRequest
+import com.example.storemanagement.listener.ProductListListener
+import com.example.storemanagement.model.Product
 import com.example.storemanagement.utilities.Constants
 import com.example.storemanagement.viewmodel.ProductViewModel
 import kotlinx.android.synthetic.main.activity_product_list.*
 
-class ProductListActivity:BaseActivity() {
+class ProductListActivity:BaseActivity(),ProductListListener {
 
     companion object{
         fun newIntent(context: Context):Intent{
@@ -30,7 +31,7 @@ class ProductListActivity:BaseActivity() {
 
         productViewModel= ViewModelProvider(this).get(ProductViewModel::class.java)
 
-        val productAdapter= ProductAdapter()
+        val productAdapter= ProductAdapter(this)
         rvProduct.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         rvProduct.adapter=productAdapter
 
@@ -84,5 +85,9 @@ class ProductListActivity:BaseActivity() {
         productViewModel.error.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    override fun onProductClick(item: Product) {
+        TODO("Not yet implemented")
     }
 }

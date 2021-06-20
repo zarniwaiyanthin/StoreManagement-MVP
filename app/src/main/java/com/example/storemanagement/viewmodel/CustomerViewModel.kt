@@ -16,11 +16,10 @@ class CustomerViewModel:BaseViewModel() {
     val error= MutableLiveData<String>()
     val customerList= MutableLiveData<List<Customer>>()
     val responseMessage=MutableLiveData<String>()
+    val isDelete=MutableLiveData<Boolean>()
 
     fun getCustomerList(userId:Int){
         isLoading.value=true
-        customerList.value=generateCustomerList()
-        return
         RestClient.getApiService()
             .getCustomerList(userId)
             .enqueue(object :Callback<CustomerListResponse>{
@@ -81,19 +80,13 @@ class CustomerViewModel:BaseViewModel() {
                         if (response.isSuccessful){
                             response.body()?.let {
                                 responseMessage.value=it.responseMessage
+                                isDelete.value=it.data
                                 error.value=it.error?.firstOrNull()?.errorMessage?:"Unknown Error"
                             }
+                        }else{
+                            isDelete.value=false
                         }
                     }
                 })
     }
-
-    private fun generateCustomerList()= listOf<Customer>(Customer(1,"lee","000093241"),
-            Customer(2,"low","0921412341"),
-            Customer(2,"low","0921412341"),
-            Customer(2,"low","0921412341"),
-            Customer(2,"low","0921412341"),
-            Customer(2,"low","0921412341"),
-            Customer(2,"low","0921412341"),
-            Customer(2,"low","0921412341"))
 }
