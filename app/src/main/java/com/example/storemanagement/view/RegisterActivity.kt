@@ -51,6 +51,11 @@ class RegisterActivity:BaseActivity(),RegisterView {
                 }
             }
         }
+
+        tvLogin.setOnClickListener {
+            startActivity(LoginActivity.newIntent(this))
+            finish()
+        }
     }
 
     override fun onDestroy() {

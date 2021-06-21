@@ -38,7 +38,7 @@ class CartActivity:BaseActivity(),CartView {
         val pref=getSharedPreferences(Constants.SHARE_PREF_NAME, Context.MODE_PRIVATE)
         val userId=pref.getInt(Constants.KEY_USER_ID,-1)
 
-        val customerId=Intent().getIntExtra("id",1)
+        val customerId=intent.getIntExtra("id",1)
 
         cartAdapter= CartAdapter()
         rvCart.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)

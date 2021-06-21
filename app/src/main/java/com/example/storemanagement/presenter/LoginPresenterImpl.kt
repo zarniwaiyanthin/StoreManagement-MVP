@@ -25,8 +25,6 @@ class LoginPresenterImpl:LoginPresenter {
 
     override fun login(req: LoginRequest){
         view?.showLoading()
-        view?.returnUser(User(2))
-        return
         RestClient.getApiService()
             .login(req)
             .enqueue(object: Callback<LoginResponse> {
